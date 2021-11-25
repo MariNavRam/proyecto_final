@@ -36,24 +36,34 @@
                         </label>
                     </div>
                 </div>
+                <div class="grid grid-cols-1">
+                    <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Descripción:</label>
+                    <input name="descripcion" class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" type="text" required/>
+                </div>
 
                 <li class="form-line" data-type="control_dropdown" id="id_7">
-                    <label class="form-label form-label-top form-label-auto" id="label_7" for="input_7"> Categorias </label>
+                    <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold mb-1">Categorias</label>
                     <div id="cid_7" class="form-input-wide" data-layout="half">
                       <select class="form-dropdown" id="input_7" name="categories[]" style="width:310px" data-component="dropdown" multiple>
-                      @foreach($categories as $gcategory)
-                            <option value="{{$category->id}}>
-
+                      @foreach($categories as $category)
+                      <option value="{{$category}}">{{$category->name}}</option>
 
                          @endforeach
                       </select>
                     </div>
                   </li>
+                  <br>
 
-                <div class="grid grid-cols-1">
-                    <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Descripción:</label>
-                    <input name="descripcion" class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" type="text" required/>
-                </div>
+                  <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold mb-1" >Clasificacion</label>
+                  <br>
+
+                  @foreach($clasifications as $clasification)
+                  <input type ="checkbox" value="{{$clasification->id}}">{{$clasification->name}}
+
+                  @endforeach
+
+                  </select>
+                  <br>
                 <div class="grid grid-cols-1">
                     <label class="uppercase md:text-sm text-xs text-gray-500 text-light font-semibold">Precio:</label>
                     <input name="precio" class="py-2 px-3 rounded-lg border-2 border-purple-300 mt-1 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" type="text" required/>
