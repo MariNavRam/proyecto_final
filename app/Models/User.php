@@ -9,7 +9,6 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
-use App\Models\Role;
 
 class User extends Authenticatable
 {
@@ -19,44 +18,45 @@ class User extends Authenticatable
     use Notifiable;
     use TwoFactorAuthenticatable;
 
-
-
     public function roles(){
-        return $this->belongstoMany('App\Models\Role');
+        return $this->belongsToMany('App\Models\Role');
     }
 
+    //Recibe los roles y validacion
     public function authorizeRoles($roles){
-        if($this->hasAnyRole($roles)){
+        if($this->hasAnyRole($roles)) { 
             return true;
 
         }
-        abort(404, 'This action is unauthorized');
+        abort(401, 'This action is unathorized');
     }
 
+    //
     public function hasAnyRole($roles){
         if(is_array($roles)){
-            foreach($roles as $key => $rol){
-                if($this->hasRole($roles)){
+            foreach ($roles as $role){
+                if($this->hasRole($role)){
                     return true;
+                }
             }
-        }
-
-        }else{
+        } else {
             if($this->hasRole($roles)){
                 return true;
             }
+
         }
         return false;
-
     }
+
+    //Ver si tiene un rol
     public function hasRole($role){
-        if($this->roles()->where('name',$role)->first()){
+        if($this->roles()->where('name', $role)->first()) {
             return true;
         }
         return false;
-
     }
 
+    
     /**
      * The attributes that are mass assignable.
      *

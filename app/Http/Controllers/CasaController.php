@@ -5,9 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Casas;
 use App\Models\Category;
-use App\Models\Clasification;
-
-
 
 class CasaController extends Controller
 {
@@ -16,11 +13,8 @@ class CasaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
-
+    public function index()
     {
-        $request->user()->authorizeRoles('admin');
-        $casas = Casas::all();
         $casas = Casas::paginate(5);
         return view('casas.index', compact('casas'));
     }
@@ -33,9 +27,7 @@ class CasaController extends Controller
     public function create()
     {
         $categories = Category::all();
-        $clasifications= Clasification::all();
-
-        return view('casas.crear', compact('categories', 'clasifications'));
+        return view('casas.crear', compact('categories'));
     }
 
     /**
@@ -50,8 +42,6 @@ class CasaController extends Controller
             'nombre'=> 'required',
             'imagen' => 'required|image|mimes:jpeg,png,svg|max:1024',
             'descripcion'=>'required',
-            'categoria'=>'required',
-            'clasificacion'=>'required',
             'precio'=>'required'
 
         ]);
@@ -67,7 +57,6 @@ class CasaController extends Controller
          Casas::create($casa);
          $casa = Casas::where('nombre', $request->nombre);
          $casa->categorias()->attach($request->categories);
-         $casa->clasificaciones()->attach($request->clasifications);
          return redirect()->route('casas.index');
 
 
@@ -106,8 +95,7 @@ class CasaController extends Controller
     public function update(Request $request, Casas $casa)
     {
         $request->validate([
-            'nombre' => 'required', 'descripcion' => 'required', 'categoria'=>'required',
-            'clasificacion'=>'required','precio'=>'required'
+            'nombre' => 'required', 'descripcion' => 'required', 'precio'=>'required'
         ]);
          $cas = $request->all();
          if($imagen = $request->file('imagen')){

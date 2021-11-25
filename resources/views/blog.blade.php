@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 
+
 <body>
 
     <header class="site-header">
@@ -95,6 +96,31 @@
                     tu espacio</p>
             </div>
         </article>
+        
+            <div class="container">
+                <div class="row comentarios justify-content-center">
+                    <div class="col-6">
+                        <form action="" class="form_comentarios d-flex justify-content-end flex-wrap">
+                            <input type="text" id="" placeholder="Titulo"></textarea>
+                            <textarea name="" id="" placeholder="Descripción"></textarea>
+                            <div class="form-group">
+                                <input type="file" name="imagen">
+                            </div>
+                            <button type="button" name="save" class="btn btn-primary">Enviar</button>
+                        </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <article class="entrada-blog"> 
+            <tr>
+                <th>#</th>
+                <th>imagen</th>
+                <th>Descripción</th>
+            </tr>
+        </article>
+
+        
     </main>
 
     <footer class="site-footer seccion">

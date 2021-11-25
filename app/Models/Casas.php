@@ -11,7 +11,7 @@ class Casas extends Model
     use HasFactory;
     use SoftDeletes;
     protected $table = 'casas';
-    protected $fillable = ['nombre', 'imagen', 'descripcion','categories', 'clasification', 'precio' ];
+    protected $fillable = ['nombre', 'imagen', 'descripcion', 'precio', ];
 
     public function categorias(){
         return $this->belongToMany(Category::class);

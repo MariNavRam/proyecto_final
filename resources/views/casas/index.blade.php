@@ -16,8 +16,6 @@
                         <th class="border px-4 py-2">Nombre</th>
                         <th class="border px-4 py-2">Imagen</th>
                         <th class="border px-4 py-2">Descripcion</th>
-                        <th class="border px-4 py-2">Categoria</th>
-                        <th class="border px-4 py-2">Clasificación</th>
                         <th class="border px-4 py-2">Precio</th>
                         <th class="border px-4 py-2">Acciones</th>
 
@@ -33,11 +31,7 @@
                             </td>
 
                             <td>{{$casa->descripcion}}</td>
-
-                            <td>{{$casa->categories}}</td>
-                            <td>{{$casa->clasifications}}</td>
                             <td>{{$casa->precio}}</td>
-
 
                             <td class="border px-4 py-2">
 

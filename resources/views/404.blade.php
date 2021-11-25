@@ -1,6 +1,3 @@
-@extends('layouts.app')
-@section('content')
-
 <!doctype html>
 <html lang="en">
 
@@ -65,4 +62,3 @@
 
 </html>
 <!-- IE needs 512+ bytes: https://blogs.msdn.microsoft.com/ieinternals/2010/08/18/friendly-http-error-pages/ -->
-@endsection()
