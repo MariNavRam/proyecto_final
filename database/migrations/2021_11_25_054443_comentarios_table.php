@@ -14,15 +14,18 @@ class ComentariosTable extends Migration
     public function up()
     {
         Schema::create('comentarios', function(Blueprint $table){
-            $table->id();
-            $table->string('title');
-            $table->longText('descripcion');
-            $table->string('imagen');
+            $table->id_image();
+            $table->string('name');
+            $table->longText('description');
+            $table->string('ruta');
             $table->datetime('date');
 
-            //Llaves
-            $table->unsignedBigInteger('users_id');
-            $table->foreign('users_id')->references('id')->on('users');
+            $table->foreignId('user_id')
+            ->constrained()
+            ->onDelete('cascade')
+            ->references('id')
+            ->on('users');
+
         });
     }
 

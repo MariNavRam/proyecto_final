@@ -1,3 +1,39 @@
+
+<!--Conexion para guardar el archivo-->
+<?php
+include 'config2.php';
+if (isset($_POST['submit'])) {   
+    if(is_uploaded_file($_FILES['fichero']['tmp_name'])) { 
+     
+     
+      // creamos las variables para subir a la db
+        $ruta = "upload/"; 
+        $nombrefinal= trim ($_FILES['fichero']['name']); //Eliminamos los espacios en blanco
+        $nombrefinal= ereg_replace (" ", "", $nombrefinal);//Sustituye una expresión regular
+        $upload= $ruta . $nombrefinal;  
+
+
+
+        if(move_uploaded_file($_FILES['fichero']['tmp_name'], $upload)) { //movemos el archivo a su ubicacion 
+                    
+                    echo "<b>Upload exitoso!. Datos:</b><br>";  
+                    echo "Nombre: <i><a href=\"".$ruta . $nombrefinal."\">".$_FILES['fichero']['name']."</a></i><br>";  
+                    echo "<br><hr><br>";  
+                         
+                   $nombre  = $_POST["nombre"]; 
+                   $description  = $_POST["description"]; 
+
+
+                   $query = "INSERT INTO archivos (name,description,ruta) 
+    VALUES ('$nombre','$description','".$nombrefinal."','".$_FILES['fichero']['type'].")"; 
+
+       mysql_query($query) or die(mysql_error()); 
+       echo "El archivo '".$nombre."' se ha subido con éxito <br>";       
+        }  
+    }  
+ } 
+?> 
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -96,29 +132,31 @@
                     tu espacio</p>
             </div>
         </article>
-        
+        <?php
+            if (isset($_SESSION['message']) && $_SESSION['message'])
+            {
+                printf('<b>%s</b>', $_SESSION['message']);
+                unset($_SESSION['message']);
+            }
+        ?>
+
             <div class="container">
                 <div class="row comentarios justify-content-center">
                     <div class="col-6">
-                        <form action="" class="form_comentarios d-flex justify-content-end flex-wrap">
-                            <input type="text" id="" placeholder="Titulo"></textarea>
-                            <textarea name="" id="" placeholder="Descripción"></textarea>
+                        <form action="<?php echo $_SERVER['PHP_SELF']; ?>" class="form_comentarios  d-flex justify-content-end flex-wrap " method="post" enctype="multipart/form-data">
+                            <input type="text" name="nombre" placeholder="Titulo"></textarea>
+                            <textarea name="description"  placeholder="Descripción"></textarea>
                             <div class="form-group">
-                                <input type="file" name="imagen">
+                            <span>Imagen:</span>
+                                <input type="file" name="fichero", class="imagen">
                             </div>
-                            <button type="button" name="save" class="btn btn-primary">Enviar</button>
+                            <input type="submit" name="uploadBtn" value="Enviar" class="btn btn-primary">
                         </form>
                         </div>
                     </div>
                 </div>
             </div>
-        <article class="entrada-blog"> 
-            <tr>
-                <th>#</th>
-                <th>imagen</th>
-                <th>Descripción</th>
-            </tr>
-        </article>
+    
 
         
     </main>
