@@ -24,8 +24,8 @@ if (isset($_POST['submit'])) {
                    $description  = $_POST["description"]; 
 
 
-                   $query = "INSERT INTO archivos (name,description,ruta) 
-    VALUES ('$nombre','$description','".$nombrefinal."','".$_FILES['fichero']['type'].")"; 
+                   $query = "INSERT INTO comentarios (name,description,ruta) 
+                            VALUES ('$nombre','$description','".$nombrefinal."','".$_FILES['fichero']['type'].")"; 
 
        mysql_query($query) or die(mysql_error()); 
        echo "El archivo '".$nombre."' se ha subido con éxito <br>";       
