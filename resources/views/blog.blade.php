@@ -7,7 +7,7 @@ if (isset($_POST['submit'])) {
      
      
       // creamos las variables para subir a la db
-        $ruta = "upload/"; 
+        $ruta = "imagenes/"; 
         $nombrefinal= trim ($_FILES['fichero']['name']); //Eliminamos los espacios en blanco
         $nombrefinal= ereg_replace (" ", "", $nombrefinal);//Sustituye una expresión regular
         $upload= $ruta . $nombrefinal;  

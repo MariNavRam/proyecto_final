@@ -2,7 +2,7 @@
 $host = "localhost";
 $dbuser = "root";
 $dbpwd = "";
-$db = "tuntoriales";
+$db = "proyecto_final";
 
 $connect = mysql_connect ($host, $dbuser, $dbpwd);
 	if(!$connect)
